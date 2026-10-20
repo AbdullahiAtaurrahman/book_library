@@ -1,4 +1,9 @@
-console.log("Hello there!");
+const container = document.querySelector(".container");
+const bookContainer = document.querySelector(".library-container");
+const addButton = document.querySelector(".add-button");
+const newbookButton = document.querySelector("#new-book-button");
+const myDialog = document.querySelector("dialog");
+const form = document.querySelector("form");
 
 const myLibrary = [];
 
@@ -20,13 +25,10 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(book);
 }
 
-addBookToLibrary("Lord of the rings", "R. R. Tolkien", "219", "Read");
+addBookToLibrary("Lord of the rings", "R. R. Tolkien", "284", "Read");
 addBookToLibrary("Things fall apart", "Chinua Achebe", "219", "Read");
-addBookToLibrary("Americana", "Chimamanda", "219", "Read");
-addBookToLibrary("Enjoy your life", "Areefy", "219", "Read");
-
-const container = document.querySelector(".container");
-const bookContainer = document.querySelector(".library-container");
+addBookToLibrary("Americana", "Chimamanda", "257", "Read");
+addBookToLibrary("Enjoy your life", "Areefy", "329", "Read");
 
 function showBook() {
   bookContainer.innerHTML = "";
@@ -52,3 +54,16 @@ function showBook() {
 }
 
 showBook();
+
+newbookButton.addEventListener("click", () => {
+  myDialog.showModal();
+  console.log("Dialog opened");
+});
+
+form.addEventListener("click", (event) => {
+  event.preventDefault();
+});
+
+addButton.addEventListener("click", () => {
+  myDialog.close();
+});

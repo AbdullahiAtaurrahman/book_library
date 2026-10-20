@@ -67,3 +67,101 @@ body {
   background-color: #ff1a1a;
   transform: scale(1.1);
 }
+
+.add-book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #45a049;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+#book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+dialog {
+  border: none;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #1e2a38;
+  color: white;
+  align-self: center;
+  justify-self: center;
+  font-size: 24px;
+}
+
+/* 1. Define the transition for both the open state and the backdrop */
+dialog,
+dialog::backdrop {
+  transition: opacity 0.3s ease, transform 0.3s ease,
+    display 0.3s ease allow-discrete, overlay 0.3s ease allow-discrete;
+}
+
+/* 2. The style when the modal is actively open */
+dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+dialog[open]::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 3. The entry starting styles (prevents blinking when opening) */
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  dialog[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+/* 4. The closed state (where it transitions TO when closing) */
+dialog {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+input,
+select {
+  font-size: 24px;
+  padding: 6px;
+  font-weight: 200;
+}
+
+input:outline {
+  border: none;
+  outline: none;
+}
+
+input:focus {
+  border: 1px solid #d4d5d4;
+  outline: none;
+}
