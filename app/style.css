@@ -111,14 +111,12 @@ dialog {
   font-size: 24px;
 }
 
-/* 1. Define the transition for both the open state and the backdrop */
 dialog,
 dialog::backdrop {
   transition: opacity 0.3s ease, transform 0.3s ease,
     display 0.3s ease allow-discrete, overlay 0.3s ease allow-discrete;
 }
 
-/* 2. The style when the modal is actively open */
 dialog[open] {
   opacity: 1;
   transform: scale(1);
@@ -128,7 +126,6 @@ dialog[open]::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* 3. The entry starting styles (prevents blinking when opening) */
 @starting-style {
   dialog[open] {
     opacity: 0;
@@ -139,7 +136,6 @@ dialog[open]::backdrop {
   }
 }
 
-/* 4. The closed state (where it transitions TO when closing) */
 dialog {
   opacity: 0;
   transform: scale(0.9);
@@ -168,8 +164,8 @@ input:focus {
 
 input[type="checkbox"] {
   display: inline-block;
-  width: 23px;
-  height: 23px;
-  accent-color: #2196f3; /* Keeps the internal checkmark high quality */
+  width: 16px;
+  height: 16px;
+  accent-color: #2196f3;
   cursor: pointer;
 }

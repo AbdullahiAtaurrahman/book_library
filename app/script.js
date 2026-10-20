@@ -18,8 +18,6 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(title, author, pages, read) {
-  // take params, create a book then store it in the array
-
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
@@ -43,10 +41,15 @@ function showBook() {
           </div>
           <div class="book-info-2">
             <p class="pages">${book.pages} pages</p>
-            <p class="read">
-            <label for="read">Read:</label>
-            <input type="checkbox" name="read" id="read" />
-            </p>
+            <label class="read">
+              <input
+                class="read-checkbox"
+                type="checkbox"
+                data-id="${book.id}"
+                ${book.read === "Read" ? "checked" : ""}
+              />
+              Read
+            </label>
           </div>
          </div>
         <button class="delete-btn" data-id="${book.id}">&times;</button>`;
@@ -56,6 +59,16 @@ function showBook() {
 }
 
 showBook();
+
+bookContainer.addEventListener("change", (event) => {
+  const readCheckbox = event.target.closest(".read-checkbox");
+  if (!readCheckbox) return;
+
+  const book = myLibrary.find((item) => item.id === readCheckbox.dataset.id);
+  if (book) {
+    book.read = readCheckbox.checked ? "Read" : "Not Read";
+  }
+});
 
 bookContainer.addEventListener("click", (event) => {
   const deleteButton = event.target.closest(".delete-btn");
