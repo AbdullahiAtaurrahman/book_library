@@ -17,6 +17,10 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.toggleReadStatus = function () {
+  this.read = this.read === "Read" ? "Not Read" : "Read";
+};
+
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
@@ -66,7 +70,7 @@ bookContainer.addEventListener("change", (event) => {
 
   const book = myLibrary.find((item) => item.id === readCheckbox.dataset.id);
   if (book) {
-    book.read = readCheckbox.checked ? "Read" : "Not Read";
+    book.toggleReadStatus();
   }
 });
 
