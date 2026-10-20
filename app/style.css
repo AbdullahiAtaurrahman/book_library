@@ -165,3 +165,11 @@ input:focus {
   border: 1px solid #d4d5d4;
   outline: none;
 }
+
+input[type="checkbox"] {
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  accent-color: #2196f3; /* Keeps the internal checkmark high quality */
+  cursor: pointer;
+}

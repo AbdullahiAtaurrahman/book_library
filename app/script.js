@@ -1,6 +1,5 @@
 const container = document.querySelector(".container");
 const bookContainer = document.querySelector(".library-container");
-const addButton = document.querySelector(".add-button");
 const newbookButton = document.querySelector("#new-book-button");
 const myDialog = document.querySelector("dialog");
 const form = document.querySelector("form");
@@ -44,7 +43,10 @@ function showBook() {
           </div>
           <div class="book-info-2">
             <p class="pages">${book.pages} pages</p>
-            <p class="read">${book.read}</p>
+            <p class="read">
+            <label for="read">Read:</label>
+            <input type="checkbox" name="read" id="read" />
+            </p>
           </div>
          </div>
         <button class="delete-btn" data-id="${book.id}">&times;</button>`;
@@ -55,15 +57,48 @@ function showBook() {
 
 showBook();
 
+bookContainer.addEventListener("click", (event) => {
+  const deleteButton = event.target.closest(".delete-btn");
+  if (!deleteButton) return;
+
+  const bookIndex = myLibrary.findIndex(
+    (book) => book.id === deleteButton.dataset.id
+  );
+
+  if (bookIndex !== -1) {
+    myLibrary.splice(bookIndex, 1);
+    showBook();
+  }
+});
+
 newbookButton.addEventListener("click", () => {
   myDialog.showModal();
   console.log("Dialog opened");
+
+  form.title.value = "";
+  form.author.value = "";
+  form.pages.value = "";
+  form.read.checked = false;
 });
 
-form.addEventListener("click", (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-});
-
-addButton.addEventListener("click", () => {
   myDialog.close();
+
+  if (
+    form.title.value != "" &&
+    form.author.value != "" &&
+    form.pages.value != ""
+  ) {
+    addBookToLibrary(
+      form.title.value,
+      form.author.value,
+      form.pages.value,
+      form.read.checked ? "Read" : "Not Read"
+    );
+
+    showBook();
+  } else {
+    alert("Fields can't be empty, please fill in book details");
+  }
 });
